@@ -2,12 +2,13 @@ version: "3"
 
 services:
   tomcat:
-    image: tomcat:8.5
+    image: tomcat:8.5-alpine
     ports:
       - 8080:8080
     volumes:
-      - ./resources/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-      - ./resources/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+      - ./config/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./config/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
+      - ./config/mysql-connector-java-5.1.44-bin.jar:/usr/local/tomcat/lib/mysql-connector-java-5.1.44-bin.jar
     networks:
       - server
     depends_on:
@@ -20,10 +21,10 @@ services:
     networks:
       - server
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: java_tomcat
-      MYSQL_USER: java_tomcat
-      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: s3cr3t
+      MYSQL_DATABASE: docker_java_tomcat
+      MYSQL_USER: docker_java_tomcat
+      MYSQL_PASSWORD: s3cr3t
 
 volumes:
   data:
